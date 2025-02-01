@@ -6,7 +6,7 @@ from collections import Counter
 import os
 
 # Initialize OpenAI client (Replace with your API key)
-client = OpenAI(api_key="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")
+client = OpenAI(api_key=os.getenv('API_KEY'))
 
 def get_tags(subject, description):
     try:

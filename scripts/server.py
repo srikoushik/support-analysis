@@ -3,9 +3,10 @@ import pandas as pd
 import io
 from openai import OpenAI
 import json
+import os
 
 app = FastAPI()
-client = OpenAI(api_key="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")
+client = OpenAI(api_key=os.getenv('API_KEY'))
 
 @app.post("/process_csv/")
 async def process_csv(file: UploadFile = File(...)):

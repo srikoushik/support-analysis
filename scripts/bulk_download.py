@@ -5,8 +5,8 @@ import os
 from bs4 import BeautifulSoup
 
 # Replace with your Freshdesk API Key and Domain
-API_KEY = "FLn7Mbql5u5Q7HXScIzQ" #"Vxv3ZV9BI6tsWc3i7"
-DOMAIN = "hyperverge.freshdesk.com" #"autoassist.freshdesk.com"
+FD_API_KEY = os.getenv('FD_API_KEY')
+FD_DOMAIN = os.getenv('FD_DOMAIN')
 
 # Define start and end date (Modify as needed)
 START_DATE = "2025-01-01T00:00:00Z"  # Start date (YYYY-MM-DDTHH:MM:SSZ)
@@ -25,8 +25,8 @@ def extract_images_from_description(description):
 
 # Loop through pages (handling pagination)
 while True:
-    url = f"https://{DOMAIN}/api/v2/tickets?updated_since={START_DATE}&page={page}&per_page=100"
-    response = requests.get(url, auth=(API_KEY, "X"))
+    url = f"https://{FD_DOMAIN}/api/v2/tickets?updated_since={START_DATE}&page={page}&per_page=100"
+    response = requests.get(url, auth=(FD_API_KEY, "X"))
 
     if response.status_code != 200:
         print(f"Error: {response.status_code}, {response.text}")
@@ -43,8 +43,8 @@ while True:
     # Fetch full details (including description and description_text) for each ticket
     for ticket in filtered_tickets:
         ticket_id = ticket["id"]
-        ticket_url = f"https://{DOMAIN}/api/v2/tickets/{ticket_id}"
-        ticket_response = requests.get(ticket_url, auth=(API_KEY, "X"))
+        ticket_url = f"https://{FD_DOMAIN}/api/v2/tickets/{ticket_id}"
+        ticket_response = requests.get(ticket_url, auth=(FD_API_KEY, "X"))
 
         if ticket_response.status_code == 200:
             full_ticket = ticket_response.json()

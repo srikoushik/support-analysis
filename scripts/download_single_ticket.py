@@ -2,18 +2,19 @@ import requests
 import json
 import csv
 from bs4 import BeautifulSoup
+import os
 
 # Replace with your Freshdesk API Key and Domain
-API_KEY = "FLn7Mbql5u5Q7HXScIzQ"
-DOMAIN = "hyperverge.freshdesk.com"
+FD_API_KEY = os.getenv('FD_API_KEY')
+FD_DOMAIN = os.getenv('FD_DOMAIN')
 
 # Replace with the specific ticket ID you want to fetch
 TICKET_ID = 27401  
 
-url = f"https://{DOMAIN}/api/v2/tickets/{TICKET_ID}"
+url = f"https://{FD_DOMAIN}/api/v2/tickets/{TICKET_ID}"
 
 # Make the API request
-response = requests.get(url, auth=(API_KEY, "X"))
+response = requests.get(url, auth=(FD_API_KEY, "X"))
 
 # Process the response
 if response.status_code == 200:
