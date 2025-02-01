@@ -1,0 +1,10 @@
+requests
+beautifulsoup4
+pandas
+openai
+flask
+fastapi
+uvicorn
+python-multipart
+streamlit
+matplotlib
